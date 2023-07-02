@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: "standard-with-typescript",
+  extends: ["standard-with-typescript", "prettier"],
   overrides: [
     {
       env: {
@@ -18,6 +18,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
+    project: ["tsconfig.json"],
   },
   rules: {},
 };
