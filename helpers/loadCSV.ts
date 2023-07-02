@@ -2,7 +2,7 @@ import { readFileSync } from "fs-extra";
 import { first, dropRightWhile, pullAt } from "lodash";
 import shuffleSeed from "shuffle-seed";
 
-type ConverterType = Record<string, (val) => any>;
+type ConverterType = Record<string, (val: any) => any>;
 
 interface LoadCSVConfigType {
   fileName: string;
