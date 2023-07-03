@@ -1,5 +1,5 @@
 import { readFileSync } from "fs-extra";
-import { first, dropRightWhile, pullAt } from "lodash";
+import { first, dropRightWhile, pullAt, isEqual } from "lodash";
 import shuffleSeed from "shuffle-seed";
 
 type ConverterType = Record<string, (val: any) => any>;
@@ -14,10 +14,10 @@ interface LoadCSVConfigType {
 }
 
 interface LoadCSVOutputType {
-  features: any[][];
-  labels: any[][];
-  testFeatures?: any[][];
-  testLabels?: any[][];
+  features: number[][];
+  labels: number[][];
+  testFeatures?: number[][];
+  testLabels?: number[][];
 }
 
 /**
@@ -56,8 +56,7 @@ function loadCsv(config: LoadCSVConfigType): LoadCSVOutputType {
     // Convert to 2-D array
     let data: any[][] = fileContents.split("\n").map((row) => row.split(","));
     // Drop empty spaces to the right
-    data = data.map((row) => dropRightWhile(row, (val) => val === "\r"));
-    data = data.map((row) => dropRightWhile(row, (val) => val === ""));
+    data = dropRightWhile(data, (val) => isEqual(val, [""]));
     const headers: string[] = first(data);
 
     data = data.map((row, rowIndex) => {
@@ -97,10 +96,10 @@ function loadCsv(config: LoadCSVConfigType): LoadCSVOutputType {
           : Math.floor(data.length / 2);
 
       output = {
-        features: featureData.slice(0, splitSize),
-        labels: labelData.slice(0, splitSize),
-        testFeatures: featureData.slice(splitSize),
-        testLabels: labelData.slice(splitSize),
+        testFeatures: featureData.slice(0, splitSize),
+        testLabels: labelData.slice(0, splitSize),
+        features: featureData.slice(splitSize),
+        labels: labelData.slice(splitSize),
       };
     } else {
       output = {
