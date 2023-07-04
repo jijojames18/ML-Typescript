@@ -28,7 +28,7 @@ const knn = (
       .slice(0, k) // Take only lowest k values
       .reduce(
         (acc: number, pair: tf.Tensor<tf.Rank>) =>
-          acc + (pair.bufferSync().get(1) as number),
+          acc + pair.bufferSync().get(1),
         0
       ) / k // Take average of lowest values
   );
