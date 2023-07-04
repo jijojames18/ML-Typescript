@@ -5,7 +5,7 @@ import knn from "./index";
 const k = 10;
 
 const { features, labels, testFeatures, testLabels } = loadCSV({
-  fileName: "./algorithms/knn/test_data.csv",
+  fileName: "./algorithms/data/knn.csv",
   shuffle: true,
   splitTest: 10,
   featureColumns: ["lat", "long", "sqft_lot", "sqft_living"],
