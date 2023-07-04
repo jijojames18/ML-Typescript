@@ -9,7 +9,6 @@ const { features, labels, testFeatures, testLabels } = loadCSV({
   featureColumns: ["horsepower", "weight", "displacement"],
   labelColumns: ["mpg"],
 });
-console.log(features);
 const regression = new LinearRegression(features, labels, {
   learningRate: 0.1,
   iterations: 4,
