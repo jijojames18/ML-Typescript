@@ -72,7 +72,7 @@ class LinearRegression {
     return features.sub(this.mean).div(this.variance.pow(0.5));
   }
 
-  gradientDescent(features: tf.Tensor2D, labels: tf.Tensor2D): void {
+  gradientDescent(features: tf.Tensor2D, labels: tf.Tensor2D): tf.Tensor2D {
     const currentGuesses = features.matMul(this.weights);
     const differences = currentGuesses.sub(labels);
 
@@ -81,7 +81,7 @@ class LinearRegression {
       .matMul(differences)
       .div(features.shape[0]);
 
-    this.weights = this.weights.sub(slopes.mul(this.learningRate));
+    return this.weights.sub(slopes.mul(this.learningRate));
   }
 
   train(): void {
@@ -91,17 +91,19 @@ class LinearRegression {
       for (let j = 0; j < batchCount; j++) {
         const startIndex = j * this.batchSize;
 
-        const featureSlice = this.features.slice(
-          [startIndex, 0],
-          [this.batchSize, -1]
-        );
+        this.weights = tf.tidy(() => {
+          const featureSlice = this.features.slice(
+            [startIndex, 0],
+            [this.batchSize, -1]
+          );
 
-        const labelSlice = this.labels.slice(
-          [startIndex, 0],
-          [this.batchSize, -1]
-        );
+          const labelSlice = this.labels.slice(
+            [startIndex, 0],
+            [this.batchSize, -1]
+          );
 
-        this.gradientDescent(featureSlice, labelSlice);
+          return this.gradientDescent(featureSlice, labelSlice);
+        });
       }
       this.updateLearningRate();
     }
@@ -129,15 +131,17 @@ class LinearRegression {
   }
 
   updateLearningRate(): void {
-    const mse = this.features
-      .matMul(this.weights)
-      .sub(this.labels)
-      .pow(2)
-      .sum(0)
-      .div(this.features.shape[0])
-      .pow(0.5)
-      .bufferSync()
-      .get();
+    const mse = tf.tidy(() =>
+      this.features
+        .matMul(this.weights)
+        .sub(this.labels)
+        .pow(2)
+        .sum(0)
+        .div(this.features.shape[0])
+        .pow(0.5)
+        .bufferSync()
+        .get()
+    );
 
     this.mseHistory.unshift(mse);
 
