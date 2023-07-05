@@ -83,7 +83,7 @@ class LogisticRegression {
   }
 
   gradientDescent(features: tf.Tensor2D, labels: tf.Tensor2D): tf.Tensor2D {
-    const currentGuesses = features.matMul(this.weights);
+    const currentGuesses = features.matMul(this.weights).sigmoid();
     const differences = currentGuesses.sub(labels);
 
     const slopes = features
@@ -125,7 +125,7 @@ class LogisticRegression {
 
     // Number of guesses that were wrong
     const wrongGuesses = testPredictions
-      .sub(testLabels)
+      .sub(testLabels) // TestLabels are either 0 or 1
       .abs()
       .sum()
       .bufferSync()
@@ -138,7 +138,7 @@ class LogisticRegression {
     return this.standardizeFeatures(tf.tensor(features))
       .matMul(this.weights)
       .sigmoid()
-      .greater(this.decisionBoundary)
+      .greater(this.decisionBoundary) // If greater than boundary, consider as 1
       .cast("float32");
   }
 
