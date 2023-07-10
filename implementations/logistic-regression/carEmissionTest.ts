@@ -1,9 +1,9 @@
 import loadCSV from "../../helpers/loadCSV";
-import LogisticRegression from "./index";
+import LogisticRegression from "../../algorithms/logistic-regression/index";
 import plot from "node-remote-plot";
 
 const { features, labels, testFeatures, testLabels } = loadCSV({
-  fileName: "./algorithms/data/regression.csv",
+  fileName: "./data/regression.csv",
   shuffle: true,
   splitTest: 50,
   featureColumns: ["horsepower", "weight", "displacement"],

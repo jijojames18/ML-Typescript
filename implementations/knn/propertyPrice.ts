@@ -1,11 +1,11 @@
 import * as tf from "@tensorflow/tfjs";
 import loadCSV from "../../helpers/loadCSV";
-import knn from "./index";
+import knn from "../../algorithms/knn/index";
 
 const k = 10;
 
 const { features, labels, testFeatures, testLabels } = loadCSV({
-  fileName: "./algorithms/data/knn.csv",
+  fileName: "./data/knn.csv",
   shuffle: true,
   splitTest: 10,
   featureColumns: ["lat", "long", "sqft_lot", "sqft_living"],
