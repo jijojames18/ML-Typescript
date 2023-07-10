@@ -18,6 +18,11 @@
     "url": "https://github.com/jijojames18/ML-Typescript/issues"
   },
   "homepage": "https://github.com/jijojames18/ML-Typescript#readme",
+  "_moduleAliases": {
+    "@algorithms": "dist/algorithms",
+    "@data": "dist/data",
+    "@helpers": "dist/helpers"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "eslint": "^8.44.0",
@@ -34,6 +39,7 @@
     "fs-extra": "^11.1.1",
     "lodash": "^4.17.21",
     "mnist-data": "^1.2.6",
+    "module-alias": "^2.2.3",
     "node-remote-plot": "^1.3.0",
     "shuffle-seed": "^1.1.6"
   }

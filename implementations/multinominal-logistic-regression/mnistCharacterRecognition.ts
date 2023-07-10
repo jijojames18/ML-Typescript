@@ -1,4 +1,5 @@
-import MultinominalLogisticRegression from "../../algorithms/multinominal-logistic-regression/index";
+import 'module-alias/register';
+import MultinominalLogisticRegression from "@algorithms/multinominal-logistic-regression";
 import plot from "node-remote-plot";
 import mnist from "mnist-data";
 import { flatMap } from "lodash";

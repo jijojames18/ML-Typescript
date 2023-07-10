@@ -1,6 +1,7 @@
+import 'module-alias/register';
 import * as tf from "@tensorflow/tfjs";
-import loadCSV from "../../helpers/loadCSV";
-import knn from "../../algorithms/knn/index";
+import loadCSV from "@helpers/loadCSV";
+import knn from "@algorithms/knn";
 
 const k = 10;
 

@@ -1,4 +1,4 @@
-import loadCsv, { type LoadCSVOutputType } from "./loadCSV";
+import loadCsv, { type LoadCSVOutputType } from "@helpers/loadCSV";
 
 const data: LoadCSVOutputType = loadCsv({
   fileName: "./helpers/test.csv",
