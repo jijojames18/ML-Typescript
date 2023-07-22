@@ -1,8 +1,8 @@
 import * as tf from "@tensorflow/tfjs-node";
 
-enum  AlgorithmType {
+enum AlgorithmType {
   CLASSIFICATION,
-  REGRESSION
+  REGRESSION,
 }
 
 const knn = (
@@ -32,27 +32,19 @@ const knn = (
     .sort((a, b) => (a.bufferSync().get(0) > b.bufferSync().get(0) ? 1 : -1)) // Sort based on shortest distance
     .slice(0, k); // Take only lowest k values
 
-
   if (type === AlgorithmType.REGRESSION) {
     return (
-      neighbors
-      .reduce(
+      neighbors.reduce(
         (acc: number, pair: tf.Tensor<tf.Rank>) =>
           acc + pair.bufferSync().get(1),
         0
       ) / k // Take average of lowest values
     );
   } else {
-    return (
-      neighbors
-      .reduce(
-        (acc: number, pair: tf.Tensor<tf.Rank>) => {
-          const current = pair.bufferSync().get(1);
-          return acc > current ? acc : current;
-        },
-        0
-      )
-    );
+    return neighbors.reduce((acc: number, pair: tf.Tensor<tf.Rank>) => {
+      const current = pair.bufferSync().get(1);
+      return acc > current ? acc : current;
+    }, 0);
   }
 };
 

@@ -54,7 +54,10 @@ function loadCsv(config: LoadCSVConfigType): LoadCSVOutputType {
   try {
     const fileContents: string = readFileSync(fileName, { encoding: "utf-8" });
     // Convert to 2-D array
-    let data: any[][] = fileContents.replace(/[\r]/g, '').split("\n").map((row) => row.split(","));
+    let data: any[][] = fileContents
+      .replace(/[\r]/g, "")
+      .split("\n")
+      .map((row) => row.split(","));
     // Drop empty spaces to the right
     data = dropRightWhile(data, (val) => isEqual(val, [""]));
     const headers: string[] = first(data);

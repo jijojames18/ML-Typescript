@@ -1,4 +1,4 @@
-import 'module-alias/register';
+import "module-alias/register";
 import * as tf from "@tensorflow/tfjs";
 import loadCSV from "@helpers/loadCSV";
 import knn, { AlgorithmType } from "@algorithms/knn";
@@ -13,7 +13,7 @@ const { features, labels, testFeatures, testLabels } = loadCSV({
     "fixed acidity",
     "citric acid",
     "residual sugar",
-    "total sulfur dioxide"
+    "total sulfur dioxide",
   ],
   labelColumns: ["quality"],
 });
@@ -25,7 +25,13 @@ const testsetCount = testFeatures?.length ?? 1;
 let failureCount = 0;
 
 testFeatures?.forEach((testFeature, i) => {
-  const result = knn(featureTensor, labelsTensor, tf.tensor(testFeature), k, AlgorithmType.CLASSIFICATION);
+  const result = knn(
+    featureTensor,
+    labelsTensor,
+    tf.tensor(testFeature),
+    k,
+    AlgorithmType.CLASSIFICATION
+  );
   const actualLabel = testLabels?.[i]?.[0] ?? 0;
   if (actualLabel !== result) {
     failureCount++;

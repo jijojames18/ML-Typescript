@@ -1,4 +1,4 @@
-import 'module-alias/register';
+import "module-alias/register";
 import loadCSV from "@helpers/loadCSV";
 import LinearRegression from "@algorithms/linear-regression";
 import plot from "node-remote-plot";
@@ -31,4 +31,4 @@ plot({
 
 console.log("R2 is", r2);
 
-regression.predict([[61.8, 307, 5.949, 4.7075]]).print(); //20.4
+regression.predict([[61.8, 307, 5.949, 4.7075]]).print(); // 20.4

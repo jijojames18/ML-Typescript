@@ -1,4 +1,4 @@
-import 'module-alias/register';
+import "module-alias/register";
 import * as tf from "@tensorflow/tfjs";
 import loadCSV from "@helpers/loadCSV";
 import knn, { AlgorithmType } from "@algorithms/knn";
@@ -17,7 +17,13 @@ const featureTensor = tf.tensor(features);
 const labelsTensor = tf.tensor(labels);
 
 testFeatures?.forEach((testFeature, i) => {
-  const result = knn(featureTensor, labelsTensor, tf.tensor(testFeature), k, AlgorithmType.REGRESSION);
+  const result = knn(
+    featureTensor,
+    labelsTensor,
+    tf.tensor(testFeature),
+    k,
+    AlgorithmType.REGRESSION
+  );
   const actualLabel = testLabels?.[i]?.[0] ?? 0;
   const err = (actualLabel - result) / actualLabel;
   console.log("Error", err * 100);

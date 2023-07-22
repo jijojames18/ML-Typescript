@@ -1,4 +1,4 @@
-import 'module-alias/register';
+import "module-alias/register";
 import loadCSV from "@helpers/loadCSV";
 import LinearRegression from "@algorithms/linear-regression";
 import plot from "node-remote-plot";
