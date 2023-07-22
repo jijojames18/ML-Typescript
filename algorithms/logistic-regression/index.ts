@@ -69,8 +69,6 @@ class LogisticRegression {
   }
 
   standardizeFeatures(features: tf.Tensor2D): tf.Tensor2D {
-    features = tf.ones([features.shape[0], 1]).concat(features, 1);
-
     if (this.mean === undefined || this.variance === undefined) {
       const { mean, variance } = tf.moments(features, 0);
       this.mean = mean;
@@ -79,7 +77,13 @@ class LogisticRegression {
       this.variance = variance.add(filler);
     }
 
-    return features.sub(this.mean).div(this.variance.pow(0.5));
+    const standardizedFeatures: tf.Tensor2D = features
+      .sub(this.mean)
+      .div(this.variance.pow(0.5));
+
+    return tf
+      .ones([standardizedFeatures.shape[0], 1])
+      .concat(standardizedFeatures, 1);
   }
 
   gradientDescent(features: tf.Tensor2D, labels: tf.Tensor2D): tf.Tensor2D {

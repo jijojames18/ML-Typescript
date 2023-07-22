@@ -83,4 +83,5 @@ plot({
   x: regression.costHistory.reverse(),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
 console.log(regression.predict([[42, 1, 4, 3, 1, 0, 0, 45]]).print());
