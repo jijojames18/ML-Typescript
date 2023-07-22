@@ -8,12 +8,12 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "baseUrl": ".",
+    "skipLibCheck": true, // Skip checking node_modules. Tensorflow throwing an error
     "paths": {
       "@algorithms/*": ["algorithms/*"],
       "@helpers/*": ["helpers/*"],
       "@data/*": ["data/*"]
     }
   },
-  "lib": ["es2015"],
-
+  "lib": ["es2015"]
 }

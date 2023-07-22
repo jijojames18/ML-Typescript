@@ -1,0 +1,6 @@
+{
+  "ignore": ["node_modules"],
+  "watch": ["algorithms", "helpers", "implementations"],
+  "exec": "npm run build",
+  "ext": "ts"
+}
