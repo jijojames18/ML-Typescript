@@ -123,7 +123,7 @@ labels.forEach((entry: number[]) => {
 
 const regression = new MultinominalLogisticRegression(features, encodedLabels, {
   learningRate: 1,
-  iterations: 40,
+  iterations: 20,
   batchSize: 100,
 });
 
